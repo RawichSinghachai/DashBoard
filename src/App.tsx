@@ -95,7 +95,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
               <Route path="/login" element={<FormLogIn/>} />
               <Route path="/logout" element={<FormLogOut/>} />
               <Route path="/dashboard" element={<Home/>}/>
-              <Route path="/button" element={<Page2/>} />        
+              <Route path="/button" element={<Page2/>} />       
           </Routes>
           </Main>
 

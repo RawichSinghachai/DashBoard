@@ -8,8 +8,12 @@ import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
+type Props = {
+  value:number,
+  type:string
+}
 
-export default function DataNow({value ,type}:any) {
+export default function DataNow({value ,type}:Props) {
   let icon
   if(type){
     if(type === 'Temperature'){

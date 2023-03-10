@@ -14,11 +14,11 @@ export default function FormLogOut() {
           <Typography variant="h5" >Get started absolutely free.</Typography>
           <Typography variant="subtitle1" sx={{mb:2}}>Already have an account?</Typography>
             <form autoComplete='off'>
-                <TextField  label="Name" variant="outlined" sx={{mr:2}}/>
-                <TextField  label="Password" variant="outlined"  />
+                <TextField  label="FirstName" variant="outlined" sx={{mr:2}}/>
+                <TextField  label="LastName" variant="outlined"  />
                 <br />
-                <TextField label="E-mail" variant="outlined" fullWidth  sx={{my:2}}/>
-                <TextField label="Password" variant="outlined" fullWidth type='password'/>
+                <TextField label="Password" variant="outlined" fullWidth type='password' sx={{my:2}}/>
+                <TextField label="E-mail" variant="outlined" fullWidth  />
                 <br />
                 <Button variant="contained" type='submit' fullWidth sx={{mr:2,mt:2}}>Log in</Button>
             </form>

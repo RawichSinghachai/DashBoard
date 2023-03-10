@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
@@ -7,29 +7,39 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import { useSelector,useDispatch} from 'react-redux'
-import {on,off} from '../stores/ButtonStore'
+import {on,off,sendDataButton } from '../stores/ButtonStore'
 import { lightGreen } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
+import { AppDispatch } from '../stores/store';
+
 
 
 export default function ButtonControl({name , id}:any) {
-  const dispatch = useDispatch()
+  const button = useSelector((state:any)=>state.ButtonStore)
+  const dispatch = useDispatch<AppDispatch>()
 
   const clickOn = (id:any) =>{
     dispatch(on(id))
-
+    setStatus('ON')
   }
 
   const clickOff = (id:any) =>{
     dispatch(off(id))
-
+    setStatus('OFF')
   }
 
+  const sendData = (state:any) =>{
+    dispatch(sendDataButton(state))
+    console.log('sendadata');
+    console.log(button);
+  }
 
-
-  const button = useSelector((state:any)=>state.ButtonStore)
-
-
+  const [status,setStatus] = useState('OFF')
+  useEffect(() => {
+    sendData(button)
+  
+  }, [status])
+  
   return (
     <Card sx={{Width:'100%' , borderRadius:3, }}>
       <CardContent>
@@ -49,14 +59,17 @@ export default function ButtonControl({name , id}:any) {
       </CardContent>
       <Divider/>
       <Stack spacing={2} direction={{md:'row' ,sm:'row', xs:'column'}} justifyContent="space-around" sx={{margin:2}}>
-        <Button variant="contained" color="success" onClick={()=>(clickOn(id))}>ON</Button>
+        <Button variant="contained" color="success" onClick={()=>{(clickOn(id))}}>ON</Button>
 
-        <Button variant="contained" color="error" onClick={()=>(clickOff(id))}>OFF</Button>
+        <Button variant="contained" color="error" onClick={()=>{(clickOff(id))}}>OFF</Button>
       </Stack>
 
     </Card>
   );
 }
+
+// แก้การส่งข้อมูลที่ช้าไป1รอบ
+
 
 
 

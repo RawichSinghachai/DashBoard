@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice , createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
 
-const buttondata = [
+let buttondata = [
     {id:1,name:'BUTTON 1',value:'OFF'},
     {id:2,name:'BUTTON 2',value:'OFF'},
     {id:3,name:'BUTTON 3',value:'OFF'},
@@ -15,7 +16,13 @@ const buttondata = [
     {id:12,name:'BUTTON 12',value:'OFF'},
   ]
 
+type Button = {id:number,name:string,value:string}
 
+export const sendDataButton = createAsyncThunk(
+  'sendDataButton',async (store:any) => {
+  await axios.post('http://localhost:3000/something',store)
+  }
+)
 
 
 
@@ -31,8 +38,25 @@ export const ButtonStore = createSlice({
       off:(state,action)=>{
         state[action.payload-1].value = 'OFF'
       },
+
+      scale:(state,action)=>{
+        let buttondata = []
+
+        for (let i = 1; i < action.payload+1; i++) {
+          let button:Button = {id:i,name:`BUTTON${i}`,value:'OFF'}
+          buttondata.push(button)
+          console.log(buttondata)
+        }
+        return buttondata
+
+      },
+    },
+    extraReducers: (builder) => {
+      builder.addCase(sendDataButton.fulfilled, (state, action) => {
+
+      })
     }
 })
 
-export const {on,off} = ButtonStore.actions
+export const {on,off,scale} = ButtonStore.actions
 export default ButtonStore.reducer
