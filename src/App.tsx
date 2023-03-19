@@ -1,6 +1,5 @@
 // import './App.css';
-import React from 'react';
-import { styled } from '@mui/material/styles';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Route, Routes } from 'react-router-dom';
@@ -8,98 +7,50 @@ import Home from './components/home/Home'
 import Page2 from './components/Page2';
 import Header from './components/menu/Header';
 import Sidebar from './components/menu/Sidebar';
-import FormLogIn from './components/FormLogIn'
-import FormLogOut from './components/FormLogOut'
+import LogInForm from './components/LogInForm'
+import RegisterForm from './components/RegisterForm'
 import { useSelector } from 'react-redux';
-import Testlogin from './Testlogin'
-
-
-
+import Drawer from '@mui/material/Drawer';
+import Map from './components/map/Map'
 
 
 
 
 function App() {
-  const statuslogin = useSelector((state:any) => state.LoginStore.status)
+  const statuslogin = useSelector((state: any) => state.LoginStore.status)
 
+  const [state, setState] = useState({
+    left: false,
+  });
 
-// const drawerWidth = 200;
-  let drawerWidth:number 
-  if(statuslogin === true){
-    drawerWidth = 200
-  }if(statuslogin === false){
-    drawerWidth = 0
-  }
+  const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
 
-  
-  type appbar = {
-    theme?:any,
-    open:boolean
-  }
-
-  const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  }));
-
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }:appbar) => ({
-    flexGrow: 1,
-    padding: theme.spacing(0),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    height:800,
-    marginLeft: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  }),
-);
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
+    setState({ ...state, [anchor]: open });
   };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-
 
 
   return (
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-          {statuslogin && <Header open={open} onhandleDrawerOpen={handleDrawerOpen}/>}
-          {statuslogin && <Sidebar open={open} setOpen={setOpen} onhandleDrawerClose={handleDrawerClose}/>}
+    <>
+      <Box sx={{ mt: 8, display: 'flex', justifyContent: 'center' }}>
+        <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
+          <Sidebar anchor={'left'} toggleDrawer={toggleDrawer} />
+        </Drawer>
+        {statuslogin && <Header toggleDrawer={toggleDrawer} />}
 
-          <Main open={open} sx={{pt:8 ,height:'100%',width:'100%'}}>
-          {!statuslogin && <DrawerHeader />}
-          
-          
-          
-          <Routes>
-              <Route path='/' element={<Testlogin/>}/>
-              <Route path="/login" element={<FormLogIn/>} />
-              <Route path="/logout" element={<FormLogOut/>} />
-              <Route path="/dashboard" element={<Home/>}/>
-              <Route path="/button" element={<Page2/>} />       
-          </Routes>
-          </Main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LogInForm />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/button" element={<Page2 />} />
+          <Route path="/map" element={<Map />} />
+        </Routes>
 
-        </Box>    
+
+      </Box>
+    </>
   );
 }
 

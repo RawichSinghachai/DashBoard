@@ -20,10 +20,14 @@ type Button = {id:number,name:string,value:string}
 
 export const sendDataButton = createAsyncThunk(
   'sendDataButton',async (store:any) => {
-  await axios.post('http://localhost:3000/something',store)
+    try{
+      await axios.post('https://testnodejs-rho.vercel.app/something',store)
+    }catch{
+      console.log("Disconenct Server");
+      
+    }
   }
 )
-
 
 
 export const ButtonStore = createSlice({

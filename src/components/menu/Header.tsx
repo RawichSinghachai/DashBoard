@@ -1,4 +1,3 @@
-import React  from 'react'
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,59 +9,30 @@ import {useNavigate } from "react-router-dom";
 import Profile from './Profile';
 
 
-const drawerWidth = 200;
-
-type appbar = {
-  theme?:any,
-  open:boolean
-}
-
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }:appbar) => ({
+const AppBar = styled(MuiAppBar)
+(({ theme}:any) => ({
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   }),
 }));
 
 
 
 
-
-export default function Header({open,onhandleDrawerOpen}:any) { 
-
-    const handleDrawerOpen = () => {
-        onhandleDrawerOpen()
-    };
-    
+export default function Header({toggleDrawer}:any) { 
     const navigate = useNavigate()
 
   return (
-    <AppBar position="fixed" open={open}>
+<AppBar position="fixed">
     <Toolbar sx={{display:'flex' , justifyContent:'space-between'}}>
         <Stack direction="row" alignItems="center">
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{ mr: 2, ...(open && { display: 'none' }) }}
-            >
+            <IconButton color="inherit" aria-label="open drawer" onClick={toggleDrawer('left', true)} edge="start">
                 <MenuIcon />
             </IconButton>
 
         
-            <Typography sx={{":hover":{cursor:'pointer'}}} onClick={()=>navigate('/')}>
+            <Typography sx={{":hover":{cursor:'pointer'},fontSize:20,pl:2}} onClick={()=>navigate('/')}>
               Dashboard
             </Typography>
         </Stack>
@@ -72,6 +42,6 @@ export default function Header({open,onhandleDrawerOpen}:any) {
         </Stack>
 
     </Toolbar>
-  </AppBar>
+    </AppBar>
   );
 }

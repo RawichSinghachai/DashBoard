@@ -1,29 +1,35 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Grid from '@mui/material/Grid';
 import ButtonControl from './ButtonControl'
-import {Navigate } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux';
 import Slider from '@mui/material/Slider';
 import { scale } from '../stores/ButtonStore';
 import Button from '@mui/material/Button';
-
+import { AppDispatch } from '../stores/store';
+import CheckLogIn from './CheckLogIn';
 
 export default function Secondpage() {
   const buttondata = useSelector((state:any)=>state.ButtonStore)
-  const statuslogin = useSelector((state:any)=>state.LoginStore.status)
+
 
   const [numbt,Setnumbt] = useState()
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const somebt = () => {
     dispatch(scale(numbt))
   }
 
+useEffect(() => {
+  <CheckLogIn/>
+}, [])
+
+
+
+
   return (
     <>
-      {statuslogin?'':<Navigate to='/login'/>}
-      <Grid container spacing={2} sx={{p:2,pt:8}}>
+      <Grid container spacing={2} sx={{p:2}}>
 
         <Grid item md={12} sm={12} xs={12} >
           <Slider
@@ -41,7 +47,7 @@ export default function Secondpage() {
 
         {buttondata.map((data:any,index:number)=>{
           return <Grid item md={3} sm={4} xs={6} key={index}>
-                    <ButtonControl name={data.name} id={data.id}/>
+                    <ButtonControl name={data.name} id={data.id} />
                   </Grid>
         })}
           

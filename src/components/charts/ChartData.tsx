@@ -48,7 +48,7 @@ export default function Chartdata() {
       ]
   return (
     <div>
-      <Card sx={{ minWidth: 275,p:4}}>
+      <Card sx={{ minWidth: 220,p:4}}>
       <ResponsiveContainer width='100%' height={200}>
         <AreaChart data={data}
   margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>

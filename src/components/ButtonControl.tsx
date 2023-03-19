@@ -18,6 +18,8 @@ export default function ButtonControl({name , id}:any) {
   const button = useSelector((state:any)=>state.ButtonStore)
   const dispatch = useDispatch<AppDispatch>()
 
+  
+
   const clickOn = (id:any) =>{
     dispatch(on(id))
     setStatus('ON')
@@ -28,17 +30,24 @@ export default function ButtonControl({name , id}:any) {
     setStatus('OFF')
   }
 
+  const [status,setStatus] = useState('')
+
+  useEffect(() => {
+    if(status === 'ON' || status === 'OFF'){
+      sendData(button)
+    }
+  }, [status])
+
+
   const sendData = (state:any) =>{
     dispatch(sendDataButton(state))
     console.log('sendadata');
     console.log(button);
   }
 
-  const [status,setStatus] = useState('OFF')
-  useEffect(() => {
-    sendData(button)
   
-  }, [status])
+
+
   
   return (
     <Card sx={{Width:'100%' , borderRadius:3, }}>
@@ -68,7 +77,6 @@ export default function ButtonControl({name , id}:any) {
   );
 }
 
-// แก้การส่งข้อมูลที่ช้าไป1รอบ
 
 
 

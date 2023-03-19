@@ -8,18 +8,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import HomeIcon from '@mui/icons-material/Home';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-import PaymentIcon from '@mui/icons-material/Payment';
-import FolderIcon from '@mui/icons-material/Folder';
 import Typography from '@mui/material/Typography';
-import SchoolIcon from '@mui/icons-material/School';
+import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import {useNavigate } from "react-router-dom";
-
-const drawerWidth = 200;
-
-
-
-
+import Box from '@mui/material/Box';
+import MapIcon from '@mui/icons-material/Map';
 
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -31,45 +24,37 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Sidebar({open , onhandleDrawerClose ,setOpen}:any) {
-  const theme = useTheme();
-
-  const handleDrawerClose = () => {
-    onhandleDrawerClose()
-  };
-
-  const closeMenu = () =>{
-    setOpen(false)
+type Props = {
+  anchor:string,
+  toggleDrawer:any
 }
+
+export default function Sidebar({anchor,toggleDrawer}:Props) {
+
 
   const navigate = useNavigate()
 
   return (
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
+    <Box
+          sx={{ width: 220 }}
+          role="presentation"
+          onClick={toggleDrawer(anchor, false)}
+          onKeyDown={toggleDrawer(anchor, false)}
+        >
+          
+      
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton >
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
 
-            <ListItem onClick={()=>{navigate('/dashboard'),closeMenu()}}>
+            <ListItem onClick={()=>{navigate('/')}}>
               <ListItemButton>
                 <ListItemIcon>
-                   <HomeIcon /> 
+                   <HomeIcon sx={{ fontSize: 35 }}/> 
                 </ListItemIcon>
                   <Typography gutterBottom variant="h6" color="themeblue.text">
                       Home
@@ -78,10 +63,10 @@ export default function Sidebar({open , onhandleDrawerClose ,setOpen}:any) {
             </ListItem>
 
 
-            <ListItem onClick={()=>{navigate('/button'),closeMenu()}}>
+            <ListItem onClick={()=>{navigate('/button')}}>
               <ListItemButton>
                 <ListItemIcon>
-                   <SchoolIcon /> 
+                   <ToggleOnIcon sx={{ fontSize: 35 }}/> 
                 </ListItemIcon>
                   <Typography gutterBottom variant="h6" color="themeblue.text">
                     Button
@@ -89,10 +74,22 @@ export default function Sidebar({open , onhandleDrawerClose ,setOpen}:any) {
               </ListItemButton>
             </ListItem>
 
+
+            <ListItem onClick={()=>{navigate('/map')}}>
+              <ListItemButton>
+                <ListItemIcon>
+                   <MapIcon sx={{ fontSize: 35 }}/> 
+                </ListItemIcon>
+                  <Typography gutterBottom variant="h6" color="themeblue.text">
+                    Map
+                  </Typography>
+              </ListItemButton>
+            </ListItem>
+
           
         </List>
         <Divider />
-      </Drawer>
 
+    </Box>
   );
 }
