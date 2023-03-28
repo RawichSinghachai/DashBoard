@@ -12,37 +12,37 @@ type Props = {
   value:number,
   type:string
 }
-
+//{laptop:70 ,tablet:70,mobile:50 }
 export default function DataNow({value ,type}:Props) {
   let icon
   if(type){
     if(type === 'Temperature'){
-      icon = <ThermostatIcon sx={{ fontSize: 70 }} />
+      icon = <ThermostatIcon sx={{ fontSize: {laptop:70 ,tablet:70,mobile:50 } }} />
     }
     if(type === 'Humidity'){
-      icon = <CloudIcon sx={{ fontSize: 70 }}/>
+      icon = <CloudIcon sx={{ fontSize: {laptop:70 ,tablet:70,mobile:50 } }}/>
     }
   }else{
-    icon = <DoDisturbOnIcon sx={{ fontSize: 70 }}/>
+    icon = <DoDisturbOnIcon sx={{ fontSize: {laptop:70 ,tablet:70,mobile:50 } }}/>
   }
   // sx={{ width: {mobile:'200px',laptop:'300px'}
-
+//{laptop:2 ,tablet:2,mobile:0 }
   return (
     <Card sx={{ maxWidth:'400 px',px:2,pt:2,}}>
       
-        <Stack  direction="row" justifyContent="center" alignItems="center" spacing={2} >
+        <Stack  direction="row" justifyContent="center" alignItems="center" spacing={{laptop:2 ,tablet:2,mobile:0 }} >
             <Stack>
-                <Typography sx={{fontSize:'16px'}}>{type} </Typography>
-                <Typography sx={{fontSize:'40px'}} >{value} </Typography>
+                <Typography sx={{fontSize:{laptop:'16px' ,tablet:'16px',mobile:'12px' }}}>{type} </Typography>
+                <Typography sx={{fontSize:{laptop:'40px' ,tablet:'40px',mobile:'30px' }}} >{value} </Typography>
             </Stack>
               {icon}
         </Stack>
 
         <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={1}>
-          <ArrowDropDownIcon sx={{fontSize:'30px',color:'constant.statusOff'}}/>
-          <Typography sx={{fontSize:'18px',color:'constant.statusOff'}}>30% </Typography>
-          <ArrowDropUpIcon sx={{fontSize:'30px',color:'constant.statusOn'}}/>
-          <Typography sx={{fontSize:'18px',color:'constant.statusOn'}}>30% </Typography>
+          <ArrowDropDownIcon sx={{fontSize:{laptop:'30px' ,tablet:'30px',mobile:'20px'},color:'constant.statusOff'}}/>
+          <Typography sx={{fontSize:{laptop:'18px' ,tablet:'18px',mobile:'16px'},color:'constant.statusOff'}}>30% </Typography>
+          <ArrowDropUpIcon sx={{fontSize:{laptop:'30px' ,tablet:'30px',mobile:'20px'},color:'constant.statusOn'}}/>
+          <Typography sx={{fontSize:{laptop:'18px' ,tablet:'18px',mobile:'16px'},color:'constant.statusOn'}}>30% </Typography>
         </Stack>
       
     </Card>

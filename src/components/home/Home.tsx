@@ -13,25 +13,25 @@ export default function Home() {
     <>
       <CheckLogIn />
       <Grid container spacing={2} justifyContent='center' sx={{ p: 2 }} >
-        <Grid item md={3} xs={6} >
+        <Grid item laptop={3} mobile={6} >
           <DataNow value={25} type={'Temperature'} />
         </Grid>
-        <Grid item md={3} xs={6} >
+        <Grid item laptop={3} mobile={6} >
           <DataNow value={60} type={'Humidity'} />
         </Grid>
-        <Grid item md={3} xs={6} >
+        <Grid item laptop={3} mobile={6} >
           <DataNow value={25} type={'Temperature'} />
         </Grid>
-        <Grid item md={3} xs={6} >
+        <Grid item laptop={3} mobile={6} >
           <DataNow value={60} type={'Humidity'} />
         </Grid>
-        <Grid item md={6} sm={6} xs={12} >
+        <Grid item laptop={6} tablet={6} mobile={12} >
           <TableData />
         </Grid>
-        <Grid item md={6} sm={6} xs={12} >
+        <Grid item laptop={6} tablet={6} mobile={12} >
           <RadiusChart />
         </Grid>
-        <Grid item md={12} xs={12} >
+        <Grid item laptop={12} mobile={12} >
           <ChartData />
         </Grid>
       </Grid>

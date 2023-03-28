@@ -49,7 +49,7 @@ export default function Radiuschart() {
         endAngle={0}
         margin={{ top: 100,}}
         >
-            <RadialBar minAngle={10} label={{ fill: '#666', position: 'insideStart' }} background clockWise={true} dataKey='uv' />
+            <RadialBar  label={{ fill: '#666', position: 'insideStart' }} background  dataKey='uv' />
             <Legend iconSize={10} width={100} height={100} layout='vertical' verticalAlign='bottom' align="right" />
             <Tooltip />
         </RadialBarChart>

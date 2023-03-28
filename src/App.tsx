@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/home/Home'
-import Page2 from './components/Page2';
+import Page2 from './components/button/Page2';
 import Header from './components/menu/Header';
 import Sidebar from './components/menu/Sidebar';
 import LogInForm from './components/LogInForm'
@@ -12,7 +12,7 @@ import RegisterForm from './components/RegisterForm'
 import { useSelector } from 'react-redux';
 import Drawer from '@mui/material/Drawer';
 import Map from './components/map/Map'
-
+import TestFeature from './components/TestFeature'
 
 
 
@@ -34,7 +34,7 @@ function App() {
 
   return (
     <>
-      <Box sx={{ mt: 8, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ mt:6, display: 'flex', justifyContent: 'center' }}>
         <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
           <Sidebar anchor={'left'} toggleDrawer={toggleDrawer} />
         </Drawer>
@@ -46,6 +46,7 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/button" element={<Page2 />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/test" element={<TestFeature />} />
         </Routes>
 
 

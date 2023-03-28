@@ -62,5 +62,5 @@ export const ButtonStore = createSlice({
     }
 })
 
-export const {on,off,scale} = ButtonStore.actions
+export const {on,off,scale,} = ButtonStore.actions
 export default ButtonStore.reducer

@@ -5,17 +5,10 @@ import App from './App'
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {store} from './stores/store'
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import { ThemeProvider } from '@mui/material/styles';
+import {theme} from './Mui'
 
 
-const theme = createTheme({
-  // palette: {
-  //   primary: {
-  //     main: red[500],
-  //   },
-  // },
-});
 
 
 
